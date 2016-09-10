@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">AlfaTest</string>
+    <string name="english_locale">English</string>
+    <string name="russian_l">Russian</string>
+    <string name="item_option_addword">Add Word</string>
+    <string name="item_option_deleteword">Delete Word</string>
+    <string name="item_option_addCategory">Add Category</string>
+    <string name="item_option_deleteCategory">Delete Category </string>
+
+    <string-array name="Category_Name_Array">
+        <item>Food</item>
+        <item>In The Office</item>
+        <item>On a Party</item>
+        <item>Science</item>
+        <item>In Market</item>
+    </string-array>
+
+
+</resources>
