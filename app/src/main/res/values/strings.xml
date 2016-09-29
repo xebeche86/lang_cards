@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">AlfaTest</string>
     <string name="english_locale">English</string>
-    <string name="russian_l">Russian</string>
+    <string name="native_lang">Native</string>
+    <string name="studied">Studied</string>
+
     <string name="item_option_addword">Add Word</string>
+    <string name="hint_add_category">Type Category Name</string>
+
+
     <string name="item_option_deleteword">Delete Word</string>
     <string name="item_option_addCategory">Add Category</string>
     <string name="item_option_deleteCategory">Delete Category </string>

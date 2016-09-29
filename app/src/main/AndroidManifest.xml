@@ -15,13 +15,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activitys.AddActivity">
-            <intent-filter>
-                <action android:name="start.addActivity" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
         <activity android:name=".activitys.CardActivity">
             <intent-filter>
                 <action android:name="start.cardActivity" />
@@ -29,7 +22,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".activitys.AddCategory"></activity>
     </application>
 
 </manifest>

@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_gravity="center"
-    android:layout_width="300dp"
-    android:layout_height="250dp">
+    android:layout_width="450dp"
+    android:layout_height="300dp"
+    android:elevation="6dp"
+    android:background="@drawable/latepaper"
+    >
     <TextView
         android:id="@+id/helloText"
-        android:textSize="40sp"
-        android:textColor="@android:color/white"
-        android:background="#E339"
+        android:textSize="50sp"
+        android:textColor="#5E350D"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Medium Text"
+        android:alpha="0"
         android:id="@+id/textView3"
         />
 </FrameLayout>

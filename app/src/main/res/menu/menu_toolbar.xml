@@ -3,40 +3,37 @@
 
     <item android:id="@+id/add_word"
         android:title="@string/item_option_addword"
-        android:icon="@drawable/pencil"
+        android:icon="@drawable/plus_circle_black_on_white"
         app:showAsAction="always"
-        android:orderInCategory="100"
+        android:orderInCategory="200"
         />
     <item
         android:id="@+id/delete_word"
         android:title="@string/item_option_deleteword"
-        android:icon="@drawable/eraser"
-        app:showAsAction="ifRoom"
-        android:orderInCategory="200"
+        android:icon="@drawable/rounded_delete_button_with_minus"
+        app:showAsAction="always"
+        android:orderInCategory="300"
         />
     <item
         android:id="@+id/remove_category"
         android:title="@string/item_option_deleteCategory"
-        android:icon="@drawable/rounded_delete_button_with_minus"
+        android:icon="@drawable/folder_minus"
         app:showAsAction="ifRoom"
-        android:orderInCategory="400"
+        android:orderInCategory="500"
         />
     <item
         android:id="@+id/add_category"
         android:title="@string/item_option_addCategory"
-        android:icon="@drawable/plus_circle_black_on_white"
+        android:icon="@drawable/folder_plus"
         app:showAsAction="ifRoom"
-        android:orderInCategory="300"
+        android:orderInCategory="400"
         />
     <item
-        android:id="@+id/english_locale"
-        android:title="@string/english_locale"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/russian_locale"
-        android:title="@string/russian_l"
-        app:showAsAction="never"
-        />
+        android:id="@+id/myswitch"
+        android:title="Card Flip"
+        app:showAsAction="always"
+        app:actionLayout="@layout/switch_lol"
+        android:orderInCategory="100"
 
+        />
 </menu>
