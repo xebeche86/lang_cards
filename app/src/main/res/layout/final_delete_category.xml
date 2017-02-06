@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/world_300">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Category to Delete"
+        android:id="@+id/textView5"
+        android:textSize="30sp"
+        android:textColor="#440E4D"
+        android:layout_marginBottom="55dp"
+        android:layout_gravity="center_horizontal" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spDeleteCategory"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
+        android:theme="@style/AppTheme"
+        android:layout_marginTop="20dp"
+        android:popupBackground="#A4825A"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="55dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            style="@style/show_title"
+            android:id="@+id/btnCancelDeleteCategory"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delete"
+            android:id="@+id/btnDeleteCategory"
+            style="@style/show_title"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

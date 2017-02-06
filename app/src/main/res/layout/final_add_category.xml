@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/world_300"
+
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter New Category Name"
+        android:id="@+id/textView"
+        android:textSize="30sp"
+        android:textColor="#440E4D"
+        android:layout_gravity="center_horizontal" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ILetAddCategory2"
+        android:hint="@string/hint_add_category"
+        app:theme="@style/AppTheme"
+
+        android:layout_marginTop="78dp">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/etAddCategory"
+            android:inputType="text"
+
+            />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="85dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            style="@style/show_title"
+            android:id="@+id/btnCancelAddCategory"
+            android:layout_weight="1" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add Category"
+            android:id="@+id/btnAddCategory"
+            style="@style/show_title"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>

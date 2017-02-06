@@ -24,8 +24,12 @@
         <item name="windowNoTitle">true</item>
         <item name="android:textColorHint">#440E4D</item>
 
-
     </style>
+
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">-->
+        <!--<item name="windowActionBar">false</item>-->
+        <!--<item name="windowNoTitle">true</item>-->
+    <!--</style>-->
 
 
     <style name="TextLabel" parent="TextAppearance.AppCompat">
@@ -43,7 +47,7 @@
         <!-- active thumb & track color (30% transparency) -->
         <item name="colorControlActivated">#E9DA69</item>
 
-        <!-- inactive thumb color -->
+         <!--inactive thumb color -->
         <item name="colorSwitchThumbNormal">#f1f1f1</item>
 
     </style>
