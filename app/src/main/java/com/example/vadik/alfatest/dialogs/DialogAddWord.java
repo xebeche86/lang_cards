@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.example.vadik.alfatest.R;
-import com.example.vadik.alfatest.SupportClasses.MenuItem;
+import com.example.vadik.alfatest.SupportClasses.DataItem;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,9 @@ public class DialogAddWord extends android.support.v4.app.DialogFragment {
     Spinner spinner;
     Button btnSave,btnDone;
     AddWordInterface addWordInterface;
-    ArrayList<String> arrayList4spinnerCategory = MenuItem.getSpinnerStrings();
+    ArrayList<String> arrayList4spinnerCategory;
+//    DataItem dataItem = new DataItem(getActivity());
+//    ArrayList<String> arrayList4spinnerCategory = dataItem.getSpinnerStrings();
 
     public  interface AddWordInterface {
          void addWordMethod (String native_lang, String foreign_lang, String Category_name);
@@ -44,11 +46,8 @@ public class DialogAddWord extends android.support.v4.app.DialogFragment {
         spinner = (Spinner)view.findViewById(R.id.spAddWord);
         btnSave = (Button)view.findViewById(R.id.btnaddword);
         btnDone = (Button)view.findViewById(R.id.btnCancelAddWord);
-
-       ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.custom_spinner_item,arrayList4spinnerCategory);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(),R.layout.custom_spinner_item,arrayList4spinnerCategory);
         spinner.setAdapter(arrayAdapter);
-
-
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,11 +67,8 @@ public class DialogAddWord extends android.support.v4.app.DialogFragment {
                 dismiss();
             }
         });
-
-
         return view;
     }
-
     @Override
     public void onStart() {
         super.onStart();
@@ -83,10 +79,11 @@ public class DialogAddWord extends android.support.v4.app.DialogFragment {
 
     }
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        DataItem dataItem = new DataItem(context);
+        arrayList4spinnerCategory = dataItem.getSpinnerStrings();
         try {
             Activity activity = (Activity)context;
             addWordInterface = (AddWordInterface) activity;

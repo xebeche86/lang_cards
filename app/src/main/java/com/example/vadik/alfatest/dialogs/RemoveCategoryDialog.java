@@ -8,31 +8,26 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.example.vadik.alfatest.SupportClasses.MenuItem;
-import com.example.vadik.alfatest.activitys.MainActivity;
+import com.example.vadik.alfatest.SupportClasses.DataItem;
 import com.example.vadik.alfatest.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class RemoveCategoryDialog extends DialogFragment {
 
     DialogAddWord.AddWordInterface addWordInterface;
+    ArrayList<String> arrayList;
 
 
     RemoveCategotyInterface removeCategotyInterface;
-
-    ArrayList<String> arrayList = MenuItem.getSpinnerStrings();
 
     public RemoveCategoryDialog() {
     }
@@ -46,7 +41,7 @@ public class RemoveCategoryDialog extends DialogFragment {
 
         final Spinner spinner = (Spinner) view.findViewById(R.id.spDeleteCategory);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), R.layout.custom_spinner_item, arrayList);
-        spinner.setAdapter(arrayAdapter);
+      spinner.setAdapter(arrayAdapter);
         Button btnRemove = (Button) view.findViewById(R.id.btnDeleteCategory);
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +66,8 @@ public class RemoveCategoryDialog extends DialogFragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        DataItem dataItem = new DataItem(getContext());
+        arrayList = dataItem.getSpinnerStrings();
         try {
             Activity activity = (Activity) context;
             removeCategotyInterface = (RemoveCategotyInterface) activity;

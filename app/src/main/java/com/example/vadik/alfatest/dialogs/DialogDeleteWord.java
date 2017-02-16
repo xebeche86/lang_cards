@@ -16,19 +16,21 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.vadik.alfatest.R;
 import com.example.vadik.alfatest.SupportClasses.DBHelper;
-import com.example.vadik.alfatest.SupportClasses.MenuItem;
+import com.example.vadik.alfatest.SupportClasses.DataItem;
 
 import java.util.ArrayList;
 
 public class DialogDeleteWord extends DialogFragment{
     Spinner spCategoryDeleteWord,spWordsDeleteWord;
     ArrayAdapter<String> arrayAdapter4words;
-    ArrayList<String> arrayList4spinnerCategoryDeleteWord = MenuItem.getSpinnerStrings();
+    ArrayAdapter<String> adapter4SpinnerCtgrDelWord;
+   // DataItem dataItem = new DataItem();
+    ArrayList<String> arrayList4spinnerCategoryDeleteWord;
     Button btnDelete,btnCancel;
-
     public interface DeleteWordInterface {
         public void deleteWord(String wordToDelete);
     }
@@ -38,21 +40,23 @@ public class DialogDeleteWord extends DialogFragment{
     public DialogDeleteWord(){
     }
 
-    private void getArrayWords(){
-        ArrayList<String> arrayList = new ArrayList<String>();
-       String[] forQuery = {spCategoryDeleteWord.getSelectedItem().toString()};
-        DBHelper dbHelper = new DBHelper(getContext());
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.query(DBHelper.TABLE_NAME,new String[]{DBHelper.COL_RUS},"col_category = ?",forQuery,null,null,"col_rus ASC");
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
-            arrayList.add(cursor.getString(cursor.getColumnIndex(DBHelper.COL_RUS)));
-            cursor.moveToNext();
-        }
-        cursor.close();
-        arrayAdapter4words = new ArrayAdapter<String>(getContext(),R.layout.custom_spinner_item,arrayList);
-        spWordsDeleteWord.setAdapter(arrayAdapter4words);
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        arrayList4spinnerCategoryDeleteWord.clear();
+    }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        DataItem dataItem = new DataItem(context);
+        arrayList4spinnerCategoryDeleteWord = dataItem.getSpinnerStrings();
+
+        try {
+            Activity activity = (Activity)context;
+            deleteWordInterfaceInstance = (DeleteWordInterface)activity;
+        } catch (ClassCastException e)
+        {throw new ClassCastException(getActivity().toString()+"Must implement DeleteWordInterface"); }
     }
 
     @Nullable
@@ -62,16 +66,14 @@ public class DialogDeleteWord extends DialogFragment{
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         spCategoryDeleteWord = (Spinner)view.findViewById(R.id.spCategoryDeleteWord);
         spWordsDeleteWord =  (Spinner)view.findViewById(R.id.spWordsDeleteWord);
-
-
-        ArrayAdapter<String> adapter4SpinnerCtgrDelWord = new ArrayAdapter<String>(getContext(),R.layout.custom_spinner_item,arrayList4spinnerCategoryDeleteWord);
+        adapter4SpinnerCtgrDelWord = new ArrayAdapter<>(getContext(),R.layout.custom_spinner_item,arrayList4spinnerCategoryDeleteWord);
         spCategoryDeleteWord.setAdapter(adapter4SpinnerCtgrDelWord);
-
-
         spCategoryDeleteWord.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 getArrayWords();
+                arrayAdapter4words.notifyDataSetChanged();
+
             }
 
             @Override
@@ -92,39 +94,35 @@ public class DialogDeleteWord extends DialogFragment{
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteWordInterfaceInstance.deleteWord(spWordsDeleteWord.getSelectedItem().toString());
-                dismiss();
+                try {
+                    deleteWordInterfaceInstance.deleteWord(spWordsDeleteWord.getSelectedItem().toString());
+                    getArrayWords();
+
+                } catch (NullPointerException e) {
+                    dismiss();
+                }
+                //dismiss();
             }
         });
 
         return view;
+    }
 
-       /* arrayList = new ArrayList<>();
+    private void getArrayWords(){
+        ArrayList<String> arrayList = new ArrayList<String>();
+        String[] forQuery = {spCategoryDeleteWord.getSelectedItem().toString()};
         DBHelper dbHelper = new DBHelper(getContext());
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.query(DBHelper.TABLE_NAME,new String[]{DBHelper.COL_RUS},"col_category = ?",category_name,null,null,"col_rus ASC");
+        Cursor cursor = database.rawQuery("select distinct col_rus FROM my_table WHERE col_rus is  not null and col_category =?" ,new String[]{spCategoryDeleteWord.getSelectedItem().toString()});
+       // Cursor cursor = database.query(DBHelper.TABLE_NAME,new String[]{DBHelper.COL_RUS},"col_category = ?",forQuery,null,null,"col_rus ASC");
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
             arrayList.add(cursor.getString(cursor.getColumnIndex(DBHelper.COL_RUS)));
             cursor.moveToNext();
         }
-        arrayAdapter4words = new ArrayAdapter<String>(getContext(),R.layout.custom_spinner_item,arrayList);
-        spWordsDeleteWord.setAdapter(arrayAdapter4words);
-        cursor.close(); */
-
-            /*dbHelper = new DBHelper(getContext());
-        db = DBHelper.getInstance(getContext()).getWritableDatabase();
-
-       String[] selection = new String[]{category_name};
-       cursor = db.query("my_table",new String[]{"_id", "col_rus"},"col_category = ?" ,selection,null,null,"col_rus ASC");
-
-      cursor.moveToFirst();
-        while (!cursor.isAfterLast()){
-            arrayList4WordsSpinner.add(cursor.getString(cursor.getColumnIndex(DBHelper.COL_RUS)));
-            cursor.moveToNext();
-        }
         cursor.close();
-        */
+        arrayAdapter4words = new ArrayAdapter<>(getContext(),R.layout.custom_spinner_item,arrayList);
+        spWordsDeleteWord.setAdapter(arrayAdapter4words);
     }
 
     @Override
@@ -137,20 +135,5 @@ public class DialogDeleteWord extends DialogFragment{
 
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        arrayList4spinnerCategoryDeleteWord.clear();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            Activity activity = (Activity)context;
-            deleteWordInterfaceInstance = (DeleteWordInterface)activity;
-        } catch (ClassCastException e)
-        {throw new ClassCastException(getActivity().toString()+"Must implement DeleteWordInterface"); }
-
-    }
 }
+

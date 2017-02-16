@@ -35,18 +35,13 @@ public class CardActivity extends AppCompatActivity {
 
     static double correct = 0;
     static double incorrect = 0;
-
-
-
-
     SwipeFlingAdapterView flingContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testing_cards_layout);
-        Toast.makeText(this,"Swipe left if you know",Toast.LENGTH_SHORT).show();
-        Toast.makeText(this,"Swipe right if you dont know",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"Swipe left if you know translate and right if you don't.  Tap  on card to see translate",Toast.LENGTH_LONG).show();
 
         count_percent = (TextView) findViewById(R.id.count_percent);
 
@@ -56,7 +51,6 @@ public class CardActivity extends AppCompatActivity {
             from = new String[] {ATTRIBUTE_ENG_TRANSLATE, ATTRIBUTE_RUS_TRANSLATE };
         }
 
-
         flingContainer = (SwipeFlingAdapterView) findViewById(R.id.frame);
         db = DBHelper.getInstance(getApplicationContext()).getReadableDatabase();
 
@@ -64,12 +58,13 @@ public class CardActivity extends AppCompatActivity {
         String string = intent.getStringExtra("Category_name");
         String[] selectionArgs = new String[]{string};
         String[] forQuery = new String[]{"_id", "col_rus", "col_eng"};
-        cursor = db.query("my_table", forQuery, "col_category =?", selectionArgs, null, null, "col_rus ASC");
-        final ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+        cursor = db.query("my_table", forQuery, "col_category =? and col_rus is not null", selectionArgs, null, null, "col_rus ASC");
+        final ArrayList<Map<String, Object>> data = new ArrayList<>();
 
         cursor.moveToFirst();
         while(!cursor.isAfterLast()) {
-            m = new HashMap<String, Object>();
+
+            m = new HashMap<>();
             m.put(ATTRIBUTE_RUS_TRANSLATE,cursor.getString(cursor.getColumnIndex(DBHelper.COL_RUS)));
             m.put(ATTRIBUTE_ENG_TRANSLATE,cursor.getString(cursor.getColumnIndex(DBHelper.COL_ENG)));
             data.add(m);
@@ -148,3 +143,5 @@ public class CardActivity extends AppCompatActivity {
 
     }
 }
+
+

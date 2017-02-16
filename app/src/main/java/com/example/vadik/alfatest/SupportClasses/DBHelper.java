@@ -15,11 +15,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String TABLE_NAME = "my_table";
     public static final String COL_ID = "_id";
-
-
-
-
-
     public static final String COL_CATEGORY = "col_category";
     public static final String COL_ENG = "col_eng";
     public static final String COL_RUS = "col_rus";
@@ -30,13 +25,8 @@ public class DBHelper extends SQLiteOpenHelper {
         if (mInstance == null) {
             mInstance = new DBHelper (activityContext.getApplicationContext());
         }
-
         return mInstance;
     }
-
-  //  private DBHelper (Context applicationContext) {
-   //     super(applicationContext, DATABASE_NAME, null, DATABASE_VERSION);
-    //}
 
     public static final String SQL_SCRIPT = " CREATE TABLE " + TABLE_NAME + " ( " + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + COL_CATEGORY + " TEXT , " + COL_ENG + " TEXT , " + COL_RUS + " TEXT );";
@@ -44,23 +34,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
   public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-
     }
 
     public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version, DatabaseErrorHandler errorHandler) {
         super(context, name, factory, version, errorHandler);
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_SCRIPT);
 
     }
-
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-
 
 }
